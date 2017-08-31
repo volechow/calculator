@@ -1,43 +1,69 @@
-function updateDisplay(ent, mem) {
-  entry = ent;
-  memory = mem;
-  $("#entry").text(ent);
-  $("#memory").text(mem);
+function updateDisplay(entry, memory=null) {
+  $("#entry").text(entry);
+  if (memory != null) {
+    $("#memory").text(memory);
+  }
 }
 
-var memory = "0";
-var entry = "0";
+function calculate(memory, value, operator) {
+  switch (operator) {
+    case "+":
+        return memory + value;
+    case "-":
+        return memory - value;
+    case "/":
+        return memory / value;
+    case "x":
+        return memory * value;
+    default:
+        return 0;
+}
+
+}
 
 $(document).ready(function() {
-  var cur = "";
-  var chained = false;
+  var memory = 0;
+  var operator = "";
 
   $(".num").click(function() {
-    cur = $(this).text();
+    var entry = $("#entry").text();
+    var cur = $(this).text();
     if (entry == "0") {
-      updateDisplay(cur, cur);
+      entry = cur;
     } else {
-      updateDisplay(entry+cur, memory+cur);
+      entry += cur;
     }
-    if (chained) {
-      updateDisplay(cur, memory+cur);
-      chained = false;
-    }
+    updateDisplay(entry);
   });
 
   $("#decimal").click(function() {
-    cur = $(this).text();
-    updateDisplay(entry+cur, memory+cur);
+    var entry = $("#entry").text();
+    entry += $(this).text();
+    updateDisplay(entry);
   });
 
   $(".operator").click(function() {
-    cur = $(this).text();
-    updateDisplay(cur, memory+cur);
-    chained = true;
+    var entry = $("#entry").text();
+    if (operator != "") {
+      memory = calculate(memory, parseFloat(entry), operator);
+    } else {
+      memory = parseFloat(entry);
+    }
+    operator = $(this).text();
+    updateDisplay(0, memory);
+  });
+
+  $("#eq").click(function() {
+    var entry = $("#entry").text();
+    var result = calculate(memory, parseFloat(entry), operator);
+    operator = "";
+    updateDisplay(result, 0);
   });
 
   $(".clear").click(function() {
-    updateDisplay("0", "0");
+    memory = 0;
+    operator = "";
+    updateDisplay(memory, memory);
   })
 
 });
