@@ -24,12 +24,14 @@ function calculate(memory, value, operator) {
 $(document).ready(function() {
   var memory = 0;
   var operator = "";
+  var start = false;
 
   $(".num").click(function() {
     var entry = $("#entry").text();
     var cur = $(this).text();
-    if (entry == "0") {
+    if (entry == "0" || start) {
       entry = cur;
+      start = false;
     } else {
       entry += cur;
     }
@@ -55,8 +57,11 @@ $(document).ready(function() {
 
   $("#eq").click(function() {
     var entry = $("#entry").text();
-    var result = calculate(memory, parseFloat(entry), operator);
+    if (operator != "") {
+      var result = calculate(memory, parseFloat(entry), operator);
+    }
     operator = "";
+    start = true;
     updateDisplay(result, 0);
   });
 
