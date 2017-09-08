@@ -1,86 +1,111 @@
+/**
+* Filename: 	 main.js
+* Description: Application logic for online calculator.
+* @version 	   0.7
+*
+* @author 		 Victor Olechow
+* E-Mail: 		 victor.olechow@haw-hamburg.de
+* Website: 	   http://users.informatik.haw-hamburg.de/~ace554/
+*
+* Copyright (C) 2017, Victor Olechow
+* All rights reserved.
+*/
 
 /**
 * Updates Display accordingly.
-* @param {String} entry - current value string
-* @param {Number} memory - value in memory
+* @param {String} display - name of display to be updated
+* @param {String} output - output value string
 */
 function updateDisplay(display, output) {
   $("#"+display).text(output);
 }
 
 /**
-* Calculates value according to operator.
-* @param {Number} memory - value in memory
-* @param {Number} value - current value
-* @param {String} operator - mathematical operator string
-* @return {Number} calculated value from memory and current value
+* Updates displays accordingly.
+* @param {String} value_in_memory
+* @param {String} current_value
+* @param {String} operator
 */
-function calculate(memory, value, operator) {
+function updateCalculator(value_in_memory, current_value, operator) {
+  updateDisplay("memory", value_in_memory);
+  updateDisplay("entry", current_value);
+  updateDisplay("operator", operator);
+}
+
+/**
+* Calculates value according to operator.
+* @param {Number} val_in_mem - value in memory
+* @param {Number} cur_value - current value
+* @param {String} operator - mathematical operator string
+* @return {Number} calculated value in memory and current value
+*/
+function calculate(value_in_memory, current_value, operator) {
   switch (operator) {
     case "+":
-        return memory + value;
+        return value_in_memory + current_value;
     case "-":
-        return memory - value;
+        return value_in_memory - current_value;
     case "/":
-        return memory / value;
+        return value_in_memory / current_value;
     case "x":
-        return memory * value;
+        return value_in_memory * current_value;
     default:
         return 0;
   }
 }
 
-/**
-* Updates entry string if entry combined with current symbol is a valid input.
-* @param {String} entry - current value string
-* @param {String} sym - current entry symbol
-* @return {String} concatenated entry string 
-*/
-function checkNumber(input) {
-  var re = new RegExp(/^([+-])?([1-9][0-9]*)(\.[0-9]*)?$/);
-  return re.test(input);
-}
-
 $(document).ready(function() {
-  var memory = 0;
-  var operator = "+";
-
-  $(".operator").click(function() {
-    var entry = $("#entry").text();
-    if (checkNumber(entry)) {
-      memory = calculate(memory, parseFloat(entry), operator);
-    }
-    operator = $(this).text();
-  });
-
-  $(".num, #decimal, .operator, #eq").click(function() {
-    var mem = $("#memory").text();
-    var entry = $("#entry").text();
-    var sym = $(this).text();
-    if (checkNumber(entry+sym)) {
-      updateDisplay("entry", entry+sym);
-    } else {
-      updateDisplay("entry", sym);
-    }
-  });
-
-  // $("#eq").click(function() {
-  //   var entry = $("#entry").text();
-  //   if (chained) {
-  //     memory = calculate(memory, parseFloat(entry), operator);
-  //     chained = false
-  //   } else {
-  //     memory = entry
-  //   }
-  //   operator = "";
-  //   updateEntry(memory);
-  //   updateMemory(0);
-  // });
+  var new_value_flag = true;
+  var operator = "";
+  var memory = null;
 
   $(".clear").click(function() {
-    memory = 0;
+    // cleanup
+    new_value_flag = true;
     operator = "";
-    updateEntry(0);
+    memory = null;
+    updateCalculator(0,0,"");
+  });
+
+  $(".num, #decimal").click(function() {
+    // initializations
+    var current_value = $("#entry").text();
+    var current_char = $(this).text();
+    var updated_value = current_value+current_char;
+    // preceeding zeros are not allowed
+    if (new_value_flag || current_value == "0") {
+      updateDisplay("entry", current_char);
+      new_value_flag = false;
+    // won't update display if not a number
+    } else if (!isNaN(updated_value)) {
+      updateDisplay("entry", updated_value);
+    }
+  });
+
+  $(".operator").click(function() {
+    var current_value = parseFloat($("#entry").text());
+    // calculate value from memory if available
+    if (memory != null) {
+      current_value = calculate(memory, current_value, operator);
+    }
+    // cleanup
+    new_value_flag = true;
+    operator = $(this).text();
+    memory = current_value;
+    updateCalculator(current_value,0,operator);
+  });
+
+  $("#eq").click(function() {
+    var current_value = parseFloat($("#entry").text());
+    // calculate value from memory if available
+    if (memory != null) {
+      current_value = calculate(memory, current_value, operator);
+    }
+    // cleanup
+    new_value_flag = true;
+    operator = "";
+    memory = null;
+    updateCalculator(0,current_value,"");
   });
 
 });
