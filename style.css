@@ -1,4 +1,55 @@
-.row div  {
-	border: solid black 1px;
-	height: 50px;
+.calculator-window {
+	border: 1px solid #c8c8c8;
+    background: #fff;
+    color: #2e2e2e;
+    border-bottom: 0;
+    text-align: right;
+}
+
+#entry {
+    font-size: 2.5em;
+}
+
+#memory {
+    font-size: 1em;
+    color: #909090;
+}
+
+.calculator-button {
+	border: 1px solid #c8c8c8;
+    background: #fff;
+    border-bottom: 0;
+    border-right: 0;
+    color: #2e2e2e;
+    text-align: center;
+    font-size: 1.6em;
+    height: 50px;
+}
+
+.operator, #eq {
+	background: #ffd90b;
+}
+
+.operator:hover, #eq:hover {
+	background: #ddc750;
+}
+
+.operator:active, #eq:active {
+	background: #c8a900;
+}
+
+.right-btn {
+    border-right: 1px solid #c8c8c8;
+}
+
+.bottom-btn {
+    border-bottom: 1px solid #c8c8c8;
+}
+
+#percentage {
+    background: #ebebeb;
+}
+
+.num:hover, #decimal:hover, .clear:hover, #percentage:hover {
+	    background-color: #dadada;
 }

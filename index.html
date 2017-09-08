@@ -6,35 +6,46 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 
 <body>
-  <div class="container" id="main">
-    <div class="row"> 
-      <div class="col-xs-12" id="entry">0</div>
-      <div class="col-xs-12" id="memory">0</div>
-    </div>
-    <div class="row"> 
-      <div class="col-xs-3 clear">AC</div>
-      <div class="col-xs-3 clear">CE</div>
-      <div class="operator col-xs-3">/</div>
-      <div class="operator col-xs-3">x</div>
-      <div class="num col-xs-3">7</div>
-      <div class="num col-xs-3">8</div>
-      <div class="num col-xs-3">9</div>
-      <div class="operator col-xs-3">-</div>
-      <div class="num col-xs-3">4</div>
-      <div class="num col-xs-3">5</div>
-      <div class="num col-xs-3">6</div>
-      <div class="operator col-xs-3">+</div>
-      <div class="num col-xs-3">1</div>
-      <div class="num col-xs-3">2</div>
-      <div class="num col-xs-3">3</div>
-      <div class="col-xs-3" id="decimal">.</div>
-      <div class="num col-xs-6" id="null">0</div>
-      <div class="col-xs-6" id="eq">=</div>
+  <br>
+  <br>
+  <div class="container-fluid" id="main">
+    <div class="row">
+      <div class="col-xs-8 col-md-6 col-xs-offset-2 col-md-offset-3">
+        <div class="row">
+          
+          <div class="calculator-window col-xs-12">
+            <div class="row">
+              <div class="col-xs-12" id="memory">0</div>
+              <div class="col-xs-12" id="entry">0</div>
+            </div>
+          </div>
+          <div class="calculator-button col-xs-3 clear">AC</div>
+          <div class="calculator-button col-xs-3 clear">CE</div>
+          <div class="calculator-button operator col-xs-3" id="percentage">%</div>
+          <div class="calculator-button operator right-btn col-xs-3">x</div>
+          <div class="calculator-button num col-xs-3">7</div>
+          <div class="calculator-button num col-xs-3">8</div>
+          <div class="calculator-button num col-xs-3">9</div>
+          <div class="calculator-button operator right-btn col-xs-3">-</div>
+          <div class="calculator-button num col-xs-3">4</div>
+          <div class="calculator-button num col-xs-3">5</div>
+          <div class="calculator-button num col-xs-3">6</div>
+          <div class="calculator-button operator right-btn col-xs-3">+</div>
+          <div class="calculator-button num col-xs-3">1</div>
+          <div class="calculator-button num col-xs-3">2</div>
+          <div class="calculator-button num col-xs-3">3</div>
+          <div class="calculator-button operator right-btn col-xs-3">/</div>
+          <div class="calculator-button bottom-btn num col-xs-6" id="null">0</div>
+          <div class="calculator-button bottom-btn col-xs-3" id="decimal">.</div>
+          <div class="calculator-button right-btn bottom-btn col-xs-3" id="eq">=</div>
+
+        </div>
+      </div>
     </div>
   </div>
 </body>
