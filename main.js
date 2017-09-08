@@ -42,15 +42,17 @@ function updateCalculator(value_in_memory, current_value, operator) {
 function calculate(value_in_memory, current_value, operator) {
   switch (operator) {
     case "+":
-        return value_in_memory + current_value;
+      return value_in_memory + current_value;
     case "-":
-        return value_in_memory - current_value;
+      return value_in_memory - current_value;
     case "/":
-        return value_in_memory / current_value;
+      return value_in_memory / current_value;
     case "x":
-        return value_in_memory * current_value;
+      return value_in_memory * current_value;
+    case "%":
+      return 0;
     default:
-        return 0;
+      return 0;
   }
 }
 
